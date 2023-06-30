@@ -13,28 +13,31 @@ class CsvParticipantsRepository implements ParticipantsRepository {
 
     private final String filePath;
 
-    @SneakyThrows
     @Override
     public List<Participant> findAll() {
-        var participants = new ArrayList<Participant>();
-        try (var scanner = new Scanner(Paths.get(filePath))) {
-            scanner.nextLine(); // Skip the header
-            while (scanner.hasNextLine()) {
-                var fields = scanner.nextLine().split(",");
-                var fullName = fields[0];
-                var role = fields[1];
-                var region = fields[2];
-                var timezoneOffset = (int) Double.parseDouble(fields[3]);
-                var acceptableHoursShift = (int) Double.parseDouble(fields[4]);
-                participants.add(new Participant(
-                    fullName,
-                    role,
-                    region,
-                    ZoneOffset.ofHours(timezoneOffset),
-                    acceptableHoursShift
-                ));
+        try {
+            var participants = new ArrayList<Participant>();
+            try (var scanner = new Scanner(Paths.get(filePath))) {
+                scanner.nextLine(); // Skip the header
+                while (scanner.hasNextLine()) {
+                    var fields = scanner.nextLine().split(",");
+                    var fullName = fields[0];
+                    var role = fields[1];
+                    var region = fields[2];
+                    var timezoneOffset = (int) Double.parseDouble(fields[3]);
+                    var acceptableHoursShift = (int) Double.parseDouble(fields[4]);
+                    participants.add(new Participant(
+                        fullName,
+                        role,
+                        region,
+                        ZoneOffset.ofHours(timezoneOffset),
+                        acceptableHoursShift
+                    ));
+                }
             }
+            return participants;
+        } catch (Exception e) {
+            throw new UnableToFindParticipantsException("There was a problem loading the participants", e.getCause());
         }
-        return participants;
     }
 }

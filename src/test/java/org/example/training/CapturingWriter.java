@@ -50,4 +50,13 @@ class CapturingWriter extends Writer {
             })
         );
     }
+
+    public static CapturingWriter capturingStandardErr() {
+        return new CapturingWriter(
+            new PrintWriter(new PrintStream(System.err) {
+                @Override
+                public void close() {}
+            })
+        );
+    }
 }
