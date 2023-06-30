@@ -9,10 +9,7 @@ class TimeSlotsRepository {
     List<TimeSlot> findAll() {
         var slots = new ArrayList<TimeSlot>();
         for (int i = 0; i < 24; i++) {
-            slots.add(new TimeSlot(
-                LocalTime.MIDNIGHT.plusHours(i),
-                WorkingHours.HalfDay
-            ));
+            slots.add(TimeSlot.halfDay(LocalTime.MIDNIGHT.plusHours(i)));
         }
         return slots;
     }

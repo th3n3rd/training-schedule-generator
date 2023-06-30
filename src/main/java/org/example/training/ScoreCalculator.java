@@ -6,6 +6,12 @@ import org.optaplanner.core.api.score.calculator.EasyScoreCalculator;
 public class ScoreCalculator implements EasyScoreCalculator<Schedule, HardMediumSoftScore> {
 
     public HardMediumSoftScore calculateScore(Schedule schedule) {
-        return HardMediumSoftScore.of(0, 0, 0);
+        var hardScore = 0;
+        for (var placement : schedule.placements()) {
+            if (!placement.suitsParticipantSchedule()) {
+                hardScore--;
+            }
+        }
+        return HardMediumSoftScore.of(hardScore, 0, 0);
     }
 }

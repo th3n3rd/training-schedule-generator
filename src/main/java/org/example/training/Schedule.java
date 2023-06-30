@@ -28,17 +28,21 @@ class Schedule {
         this.availableSlots = availableSlots;
     }
 
-    public List<Session> getSessions() {
+    public List<Placement> placements() {
+        return placements;
+    }
+
+    public List<Session> sessions() {
         var sessions = new ArrayList<Session>();
         placements
             .stream()
-            .collect(Collectors.groupingBy(Placement::getSlot))
+            .collect(Collectors.groupingBy(Placement::slot))
             .forEach((slot, placements) -> sessions.add(
                 new Session(
                     slot,
                     placements
                         .stream()
-                        .map(Placement::getParticipant)
+                        .map(Placement::participant)
                         .toList()
                 )
             ));

@@ -7,7 +7,7 @@ class SchedulePrinter {
     String print(Schedule schedule) {
         var content = new StringBuilder();
         content.append("\nSolved training schedule:\n\n");
-        schedule.getSessions().forEach(session -> {
+        schedule.sessions().forEach(session -> {
             var participants = session.participants();
             content
                 .append(participants.size())

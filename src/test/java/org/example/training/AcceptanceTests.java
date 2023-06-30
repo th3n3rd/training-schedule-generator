@@ -26,6 +26,15 @@ public class AcceptanceTests {
         assertErrorContainsLine("Usage: java -jar training-schedule-generator.jar /path/to/your/participants/file.csv");
     }
 
+    @Test
+    void scheduleTrainingForDifferentTimezones() {
+        runAppAndWait("./src/test/resources/participants-timezones.csv");
+        assertOutputContainsLine("3 Participants: George Green, Hannah Harris, Isaac Ingram");
+        assertOutputContainsLine("3 Participants: Andy Anderson, Bella Brown, Charlie Clark");
+        assertOutputContainsLine("3 Participants: Daphne Davis, Eddie Edwards, Fiona Foster");
+        assertNoErrors();
+    }
+
     private void assertErrorContainsLine(String expected) {
         assertThat(error.captured()).contains("%s\n".formatted(expected));
     }

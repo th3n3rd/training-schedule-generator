@@ -1,0 +1,10 @@
+Name,Role,Region,Timezone,Acceptable Hours Shift
+Andy Anderson,Software Engineer,EMEA,0,0
+Bella Brown,Product Manager,EMEA,0,0
+Charlie Clark,Designer,EMEA,0,0
+Daphne Davis,Software Engineer,AMER,-7,0
+Eddie Edwards,Product Manager,AMER,-7,0
+Fiona Foster,Designer,AMER,-7,0
+George Green,Software Engineer,APJ,+7,0
+Hannah Harris,Product Manager,APJ,+7,0
+Isaac Ingram,Designer,APJ,+7,0
