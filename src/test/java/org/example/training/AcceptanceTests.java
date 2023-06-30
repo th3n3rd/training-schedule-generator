@@ -11,9 +11,9 @@ public class AcceptanceTests {
     private final CapturingWriter output = capturingStandardOut();
 
     @Test
-    public void greetingTheWorld() {
+    void basicTrainingSchedule() {
         runAppAndWait();
-        assertOutputContainsLine("Hello World!");
+        assertOutputContainsLine("3 Participants: Andy Anderson, Bella Brown, Charlie Clark");
     }
 
     private void assertOutputContainsLine(String expected) {
@@ -21,7 +21,10 @@ public class AcceptanceTests {
     }
 
     private void runAppAndWait() {
-        var app = runAsync(new TrainingSchedulingApp(output));
+        var app = runAsync(new TrainingSchedulingApp(
+            output,
+            new Config()
+        ));
         app.join();
     }
 }
