@@ -12,7 +12,7 @@ public class AcceptanceTests {
 
     @Test
     void basicTrainingSchedule() {
-        runAppAndWait();
+        runAppAndWait("./src/test/resources/participants-basic.csv");
         assertOutputContainsLine("3 Participants: Andy Anderson, Bella Brown, Charlie Clark");
     }
 
@@ -20,10 +20,10 @@ public class AcceptanceTests {
         assertThat(output.captured()).contains("%s\n".formatted(expected));
     }
 
-    private void runAppAndWait() {
+    private void runAppAndWait(String participantsFilePath) {
         var app = runAsync(new TrainingSchedulingApp(
             output,
-            new Config()
+            new Config(participantsFilePath)
         ));
         app.join();
     }

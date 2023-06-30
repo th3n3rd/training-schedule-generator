@@ -32,7 +32,7 @@ public class TrainingSchedulingApp implements Runnable {
     public static void main(String[] args) {
         new TrainingSchedulingApp(
             new OutputStreamWriter(System.out),
-            new Config()
+            new Config(args[0])
         ).run();
     }
 }

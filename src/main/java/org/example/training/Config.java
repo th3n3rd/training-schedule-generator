@@ -16,38 +16,15 @@ import org.optaplanner.core.config.solver.SolverConfig;
 @RequiredArgsConstructor
 class Config {
 
+    private final String participantsFilePath;
+
     ParticipantsRepository participantsRepository() {
-        return new InMemoryParticipantsRepository(
-            List.of(
-                new Participant(
-                    "Andy Anderson",
-                    "Software Engineer",
-                    "EMEA",
-                    ZoneOffset.UTC,
-                    WorkingHours.NoHoursShift
-                ),
-                new Participant(
-                    "Bella Brown",
-                    "Product Manager",
-                    "EMEA",
-                    ZoneOffset.UTC,
-                    WorkingHours.NoHoursShift
-                ),
-                new Participant(
-                    "Charlie Clark",
-                    "Designer",
-                    "EMEA",
-                    ZoneOffset.UTC,
-                    WorkingHours.NoHoursShift
-                )
-            )
-        );
+        return new CsvParticipantsRepository(participantsFilePath);
     }
 
     TimeSlotsRepository timeSlotsRepository() {
         return new TimeSlotsRepository();
     }
-
 
     Solver<Schedule> scheduleSolver() {
         var solverConfig = new SolverConfig()
