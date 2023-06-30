@@ -18,6 +18,8 @@ class ParticipantTests {
     class Availability {
         private static final ZoneOffset OneHourAhead = ZoneOffset.ofHours(+1);
         private static final ZoneOffset OneHourBehind = ZoneOffset.ofHours(-1);
+        private static final int ShiftEarlier = -1;
+        private static final int ShiftLater = +1;
 
         @Test
         void withinUtc() {
@@ -38,6 +40,32 @@ class ParticipantTests {
             assertThat(anyParticipant(OneHourBehind).isAvailableFor(halfDaySessionAt("10:00"))).isTrue();
             assertThat(anyParticipant(OneHourBehind).isAvailableFor(halfDaySessionAt("14:00"))).isTrue();
             assertThat(anyParticipant(OneHourBehind).isAvailableFor(halfDaySessionAt("15:00"))).isFalse();
+        }
+
+        @Test
+        void withinUtcButWorkingHoursAreShifted() {
+            assertThat(anyParticipant(UTC, ShiftEarlier).isAvailableFor(halfDaySessionAt("07:00"))).isFalse();
+            assertThat(anyParticipant(UTC, ShiftEarlier).isAvailableFor(halfDaySessionAt("08:00"))).isTrue();
+            assertThat(anyParticipant(UTC, ShiftEarlier).isAvailableFor(halfDaySessionAt("12:00"))).isTrue();
+            assertThat(anyParticipant(UTC, ShiftEarlier).isAvailableFor(halfDaySessionAt("13:00"))).isFalse();
+
+            assertThat(anyParticipant(UTC, ShiftLater).isAvailableFor(halfDaySessionAt("09:00"))).isFalse();
+            assertThat(anyParticipant(UTC, ShiftLater).isAvailableFor(halfDaySessionAt("10:00"))).isTrue();
+            assertThat(anyParticipant(UTC, ShiftLater).isAvailableFor(halfDaySessionAt("14:00"))).isTrue();
+            assertThat(anyParticipant(UTC, ShiftLater).isAvailableFor(halfDaySessionAt("15:00"))).isFalse();
+        }
+
+        @Test
+        void differentTimezoneAndWorkingHoursAreShifted() {
+            assertThat(anyParticipant(OneHourAhead, ShiftEarlier).isAvailableFor(halfDaySessionAt("06:00"))).isFalse();
+            assertThat(anyParticipant(OneHourAhead, ShiftEarlier).isAvailableFor(halfDaySessionAt("07:00"))).isTrue();
+            assertThat(anyParticipant(OneHourAhead, ShiftEarlier).isAvailableFor(halfDaySessionAt("11:00"))).isTrue();
+            assertThat(anyParticipant(OneHourAhead, ShiftEarlier).isAvailableFor(halfDaySessionAt("12:00"))).isFalse();
+
+            assertThat(anyParticipant(OneHourBehind, ShiftLater).isAvailableFor(halfDaySessionAt("10:00"))).isFalse();
+            assertThat(anyParticipant(OneHourBehind, ShiftLater).isAvailableFor(halfDaySessionAt("11:00"))).isTrue();
+            assertThat(anyParticipant(OneHourBehind, ShiftLater).isAvailableFor(halfDaySessionAt("15:00"))).isTrue();
+            assertThat(anyParticipant(OneHourBehind, ShiftLater).isAvailableFor(halfDaySessionAt("16:00"))).isFalse();
         }
     }
 

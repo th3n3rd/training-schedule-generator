@@ -35,6 +35,13 @@ public class AcceptanceTests {
         assertNoErrors();
     }
 
+    @Test
+    void scheduleTrainingAccountingForAcceptableShiftsInWorkingHours() {
+        runAppAndWait("./src/test/resources/participants-acceptable-shift.csv");
+        assertOutputContainsLine("9 Participants: Andy Anderson, Bella Brown, Charlie Clark, Daphne Davis, Eddie Edwards, Fiona Foster, George Green, Hannah Harris, Isaac Ingram");
+        assertNoErrors();
+    }
+
     private void assertErrorContainsLine(String expected) {
         assertThat(error.captured()).contains("%s\n".formatted(expected));
     }

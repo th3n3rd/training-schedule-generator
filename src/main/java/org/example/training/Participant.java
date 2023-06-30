@@ -17,7 +17,7 @@ record Participant(
             LocalDate.now(),
             WorkingHours.StartTime,
             timezoneOffset
-        );
+        ).plusHours(acceptableHoursShift);
     }
 
     public OffsetDateTime latestEndTime() {
@@ -25,7 +25,7 @@ record Participant(
             LocalDate.now(),
             WorkingHours.EndTime,
             timezoneOffset
-        );
+        ).plusHours(acceptableHoursShift);
     }
 
     public boolean isAvailableFor(TimeSlot slot) {
