@@ -10,7 +10,7 @@ class Placement {
 
     private Participant participant;
 
-    @PlanningVariable
+    @PlanningVariable(nullable = true)
     private TimeSlot slot;
 
     public Placement(Participant participant) {
@@ -23,9 +23,5 @@ class Placement {
 
     public TimeSlot slot() {
         return slot;
-    }
-
-    public boolean suitsParticipantSchedule() {
-        return participant.isAvailableFor(slot);
     }
 }

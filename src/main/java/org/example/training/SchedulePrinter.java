@@ -20,6 +20,19 @@ class SchedulePrinter {
                 .append("\n\n");
         });
 
+        var unplacedParticipants = schedule.unplacedParticipants();
+        if (!unplacedParticipants.isEmpty()) {
+            content
+                .append(unplacedParticipants.size())
+                .append(" Unplaced: ")
+                .append(unplacedParticipants
+                    .stream()
+                    .map(Participant::fullName)
+                    .collect(Collectors.joining(", "))
+                )
+                .append("\n\n");
+        }
+
         return content.toString();
     }
 

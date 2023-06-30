@@ -2,6 +2,7 @@ package org.example.training;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.NoArgsConstructor;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
@@ -28,14 +29,11 @@ class Schedule {
         this.availableSlots = availableSlots;
     }
 
-    public List<Placement> placements() {
-        return placements;
-    }
-
     public List<Session> sessions() {
         var sessions = new ArrayList<Session>();
         placements
             .stream()
+            .filter(placement -> !Objects.isNull(placement.slot()))
             .collect(Collectors.groupingBy(Placement::slot))
             .forEach((slot, placements) -> sessions.add(
                 new Session(
@@ -47,5 +45,13 @@ class Schedule {
                 )
             ));
         return sessions;
+    }
+
+    public List<Participant> unplacedParticipants() {
+        return placements
+            .stream()
+            .filter(placement -> Objects.isNull(placement.slot()))
+            .map(Placement::participant)
+            .toList();
     }
 }

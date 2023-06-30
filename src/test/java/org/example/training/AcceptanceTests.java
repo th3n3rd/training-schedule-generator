@@ -42,6 +42,13 @@ public class AcceptanceTests {
         assertNoErrors();
     }
 
+    @Test
+    void unsolvableTrainingSchedule() {
+        runAppAndWait("./src/test/resources/participants-unsolvable.csv");
+        assertOutputContainsLine("3 Unplaced: Jessica Johnson, Kevin King, Laura Lewis");
+        assertNoErrors();
+    }
+
     private void assertErrorContainsLine(String expected) {
         assertThat(error.captured()).contains("%s\n".formatted(expected));
     }
