@@ -1,0 +1,13 @@
+Name,Role,Region,Timezone,Acceptable Hours Shift
+Andrew Alistair,Product Manager,AMER,-4.00,-2.00
+Becky Burton,Product Manager,AMER,-4.00,1.00
+Charlie Chapman,Designer,EMEA,2.00,1.00
+Daisy Donovan,Software Engineer,AMER,-5.00,2.00
+Eddie Edwards,Software Engineer,AMER,-4.00,0.00
+Fiona Franklin,Designer,EMEA,1.00,0.00
+George Green,Software Engineer,EMEA,1.00,-1.00
+Hannah Hill,Designer,AMER,-4.00,1.00
+Jenny Johnson,Product manager,AMER,-4.00,1.00
+Kevin King,Product Manager,AMER,-7.00,-2.00
+Lucy Lewis,Designer,AMER,-5.00,2.00
+Michael Mitchell,Software Engineer,EMEA,1.00,2.00

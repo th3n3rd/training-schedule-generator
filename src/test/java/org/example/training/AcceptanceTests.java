@@ -49,6 +49,14 @@ public class AcceptanceTests {
         assertNoErrors();
     }
 
+    @Test
+    void scheduleFewerTrainingSessions() {
+        runAppAndWait("./src/test/resources/participants-fewer-sessions.csv");
+        assertOutputContainsLine("7 Participants: Becky Burton, Daisy Donovan, Eddie Edwards, Hannah Hill, Jenny Johnson, Kevin King, Lucy Lewis");
+        assertOutputContainsLine("Andrew Alistair, Charlie Chapman, Fiona Franklin, George Green, Michael Mitchell");
+        assertNoErrors();
+    }
+
     private void assertErrorContainsLine(String expected) {
         assertThat(error.captured()).contains("%s\n".formatted(expected));
     }

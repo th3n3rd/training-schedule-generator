@@ -24,6 +24,8 @@ public class ScoreCalculator implements EasyScoreCalculator<Schedule, HardMedium
                     hardScore--;
                 }
             }
+            // encourage to have fewer sessions
+            softScore--;
         }
 
         return HardMediumSoftScore.of(hardScore, mediumScore, softScore);
