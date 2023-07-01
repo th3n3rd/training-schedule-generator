@@ -1,26 +1,26 @@
 package org.example.training;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 class SchedulePrinter {
 
     String print(Schedule schedule) {
         var content = new StringBuilder();
-        content.append("\nSolved training schedule:\n\n");
-        schedule.sessions().forEach(session -> {
-            var participants = session.participants();
-            content
-                .append(participants.size())
-                .append(" Participants: ")
-                .append(participants
-                    .stream()
-                    .map(Participant::fullName)
-                    .collect(Collectors.joining(", "))
-                )
-                .append("\n\n");
-        });
+        appendIntro(content);
+        appendTrainingSessionsInfo(content, schedule.sessions());
+        appendUnplacedParticipantsInfo(content, schedule.unplacedParticipants());
+        return content.toString();
+    }
 
-        var unplacedParticipants = schedule.unplacedParticipants();
+    private static void appendIntro(StringBuilder content) {
+        content.append("\nSolved training schedule:\n\n");
+    }
+
+    private static void appendUnplacedParticipantsInfo(
+        StringBuilder content,
+        List<Participant> unplacedParticipants
+    ) {
         if (!unplacedParticipants.isEmpty()) {
             content
                 .append(unplacedParticipants.size())
@@ -32,8 +32,30 @@ class SchedulePrinter {
                 )
                 .append("\n\n");
         }
+    }
 
-        return content.toString();
+    private static void appendTrainingSessionsInfo(
+        StringBuilder content,
+        List<Session> trainingSessions
+    ) {
+        trainingSessions.forEach(session -> {
+            var slot = session.slot();
+            var participants = session.participants();
+            content
+                .append("From ")
+                .append(slot.startTime().toLocalTime())
+                .append(" to ")
+                .append(slot.endTime().toLocalTime())
+                .append(" UTC\n")
+                .append(participants.size())
+                .append(" Participants: ")
+                .append(participants
+                    .stream()
+                    .map(Participant::fullName)
+                    .collect(Collectors.joining(", "))
+                )
+                .append("\n\n");
+        });
     }
 
 }

@@ -14,7 +14,12 @@ class Placement {
     private TimeSlot slot;
 
     public Placement(Participant participant) {
+        this(participant, null);
+    }
+
+    public Placement(Participant participant, TimeSlot slot) {
         this.participant = participant;
+        this.slot = slot;
     }
 
     public Participant participant() {

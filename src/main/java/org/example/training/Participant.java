@@ -37,4 +37,12 @@ record Participant(
             latestEndTime()
         );
     }
+
+    public Placement scheduleFor(TimeSlot slot) {
+        return new Placement(this, slot);
+    }
+
+    public Placement unplaced() {
+        return new Placement(this);
+    }
 }
