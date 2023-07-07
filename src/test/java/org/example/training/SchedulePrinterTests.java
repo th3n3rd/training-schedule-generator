@@ -149,7 +149,48 @@ class SchedulePrinterTests {
         );
     }
 
-    private static void assertContainsLinesInOrder(String printedSchedule, String ...expectedLines) {
+    @Test
+    void printPlacedParticipantsDetails() {
+        var schedule = new Schedule(
+            List.of(
+                engineerInNewYork("Aaron Armstrong").scheduleFor(halfDaySessionAt("13:00")),
+                designerInUk("Bella Bennet").scheduleFor(halfDaySessionAt("13:00"))
+            ),
+            emptyList()
+        );
+
+        var printedSchedule = printer.print(schedule);
+
+        assertContainsLinesInOrder(
+            printedSchedule,
+            "From 13:00 to 17:00 UTC",
+            "2 Participants: Aaron Armstrong, Bella Bennet",
+            "> Aaron Armstrong (Software Engineer in AMER, available from 09:00 to 17:00 UTC-04:00)",
+            "> Bella Bennet (Designer in EMEA, available from 09:00 to 17:00 UTC+01:00)"
+        );
+    }
+
+    @Test
+    void printUnplacedParticipantsDetails() {
+        var schedule = new Schedule(
+            List.of(
+                designerInUk("Ethan Evans").unplaced(),
+                engineerInNewYork("Felicity Fisher").unplaced()
+            ),
+            emptyList()
+        );
+
+        var printedSchedule = printer.print(schedule);
+
+        assertContainsLinesInOrder(
+            printedSchedule,
+            "2 Unplaced: Ethan Evans, Felicity Fisher",
+            "> Ethan Evans (Designer in EMEA, available from 09:00 to 17:00 UTC+01:00)",
+            "> Felicity Fisher (Software Engineer in AMER, available from 09:00 to 17:00 UTC-04:00)"
+        );
+    }
+
+    private void assertContainsLinesInOrder(String printedSchedule, String ...expectedLines) {
         var actualLines = splitLinesAndDiscardLineFeeds(printedSchedule);
         var lastFoundAtPosition = NotFound;
         for (var expectedLine : expectedLines) {
@@ -173,7 +214,7 @@ class SchedulePrinterTests {
         }
     }
 
-    private static List<String> splitLinesAndDiscardLineFeeds(String printedSchedule) {
+    private List<String> splitLinesAndDiscardLineFeeds(String printedSchedule) {
         return Arrays.stream(printedSchedule.split("\n")).filter(it -> !it.isEmpty()).toList();
     }
 
@@ -187,6 +228,26 @@ class SchedulePrinterTests {
             "dont-care",
             "dont-care",
             ZoneOffset.UTC,
+            WorkingHours.NoHoursShift
+        );
+    }
+
+    private Participant engineerInNewYork(String fullName) {
+        return new Participant(
+            fullName,
+            "Software Engineer",
+            "AMER",
+            ZoneOffset.ofHours(-4),
+            WorkingHours.NoHoursShift
+        );
+    }
+
+    private Participant designerInUk(String fullName) {
+        return new Participant(
+            fullName,
+            "Designer",
+            "EMEA",
+            ZoneOffset.ofHours(+1),
             WorkingHours.NoHoursShift
         );
     }

@@ -48,14 +48,29 @@ Solved training schedule:
 
 From 00:00 to 04:00 UTC
 3 Participants: Molly Morris, Maggie Mitchell, Minnie Moore
+> Molly Morris (Product Manager in APJ, available from 06:00 to 14:00 UTC+08:00)
+> Maggie Mitchell (Software Engineer in APJ, available from 05:00 to 13:00 UTC+08:00)
+> Minnie Moore (Platform Engineer in APJ, available from 04:00 to 12:00 UTC+08:00)
 
 From 13:00 to 17:00 UTC
 4 Participants: Danny Davis, Daisy Donovan, Daphne Drake, Derek Daniels
+> Danny Davis (Software Engineer in EMEA, available from 11:00 to 19:00 UTC+01:00)
+> Daisy Donovan (Platform Engineer in EMEA, available from 10:00 to 18:00 UTC+01:00)
+> Daphne Drake (Product Manager in EMEA, available from 10:00 to 18:00 UTC+01:00)
+> Derek Daniels (Software Engineer in EMEA, available from 11:00 to 19:00 UTC+01:00)
 
 From 14:00 to 18:00 UTC
 6 Participants: Tommy Turner, Timmy Thompson, Dexter Douglas, Toby Taylor, Tina Tyler, Teddy Torres
+> Tommy Turner (Designer in AMER, available from 09:00 to 17:00 UTC-05:00)
+> Timmy Thompson (Product Manager in AMER, available from 09:00 to 17:00 UTC-05:00)
+> Dexter Douglas (Designer in EMEA, available from 11:00 to 19:00 UTC+01:00)
+> Toby Taylor (Software Engineer in AMER, available from 09:00 to 17:00 UTC-05:00)
+> Tina Tyler (Platform Engineer in AMER, available from 09:00 to 17:00 UTC-05:00)
+> Teddy Torres (Designer in AMER, available from 09:00 to 17:00 UTC-05:00)
 
 2 Unplaced: Mickey Miller, Mandy Murphy
+> Mickey Miller (Designer in APJ, available from 03:00 to 11:00 UTC+08:00)
+> Mandy Murphy (Product Manager in APJ, available from 02:00 to 10:00 UTC+08:00)
 ```
 
 ## Sample CSV Input

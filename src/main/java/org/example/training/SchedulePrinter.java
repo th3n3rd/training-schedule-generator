@@ -33,6 +33,8 @@ class SchedulePrinter {
                     .map(Participant::fullName)
                     .collect(Collectors.joining(", "))
                 )
+                .append("\n")
+                .append(participantsDetails(unplacedParticipants))
                 .append("\n\n");
         }
     }
@@ -60,8 +62,21 @@ class SchedulePrinter {
                         .map(Participant::fullName)
                         .collect(Collectors.joining(", "))
                     )
+                    .append("\n")
+                    .append(participantsDetails(participants))
                     .append("\n\n");
             });
+    }
+
+    private static String participantsDetails(List<Participant> participants) {
+        return participants.stream().map(participant -> "> %s (%s in %s, available from %s to %s UTC%s)".formatted(
+            participant.fullName(),
+            participant.role(),
+            participant.region(),
+            participant.earliestStartTime().toLocalTime(),
+            participant.latestEndTime().toLocalTime(),
+            participant.timezoneOffset()
+        )).collect(Collectors.joining("\n"));
     }
 
 }
