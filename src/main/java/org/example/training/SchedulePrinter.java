@@ -1,5 +1,8 @@
 package org.example.training;
 
+import static java.util.Comparator.comparing;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,24 +41,27 @@ class SchedulePrinter {
         StringBuilder content,
         List<Session> trainingSessions
     ) {
-        trainingSessions.forEach(session -> {
-            var slot = session.slot();
-            var participants = session.participants();
-            content
-                .append("From ")
-                .append(slot.startTime().toLocalTime())
-                .append(" to ")
-                .append(slot.endTime().toLocalTime())
-                .append(" UTC\n")
-                .append(participants.size())
-                .append(" Participants: ")
-                .append(participants
-                    .stream()
-                    .map(Participant::fullName)
-                    .collect(Collectors.joining(", "))
-                )
-                .append("\n\n");
-        });
+        trainingSessions
+            .stream()
+            .sorted(comparing(Session::startTime))
+            .forEach(session -> {
+                var slot = session.slot();
+                var participants = session.participants();
+                content
+                    .append("From ")
+                    .append(slot.startTime().toLocalTime())
+                    .append(" to ")
+                    .append(slot.endTime().toLocalTime())
+                    .append(" UTC\n")
+                    .append(participants.size())
+                    .append(" Participants: ")
+                    .append(participants
+                        .stream()
+                        .map(Participant::fullName)
+                        .collect(Collectors.joining(", "))
+                    )
+                    .append("\n\n");
+            });
     }
 
 }
