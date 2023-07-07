@@ -3,6 +3,8 @@
 The Training Schedule Generator is a Java application that takes a CSV file containing participants information and
 generates a training schedule by grouping participants based on their timezones and preferences for working hours.
 
+Currently working hours and training length have been hard-coded to "09:00 - 17:00" and "4 hours" respectively.
+
 ## Overview
 
 The application uses an AI constraint solver, powered by [OptaPlanner](https://www.optaplanner.org/docs/optaplanner/latest/planner-introduction/planner-introduction.html),
