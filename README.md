@@ -12,7 +12,7 @@ The application accepts a CSV file as input, which should contain the following 
 - **Name:** The name of the participant.
 - **Role:** The role of the participant.
 - **Region:** The home region of the participant
-- **Timezone:** The timezone of the participant specified using only the timezone offset (e.g., "+02:00").
+- **Timezone:** The timezone of the participant specified using only the timezone offset (e.g., "+2").
 - **Acceptable Hours Shift:** Acceptable working hour shift (e.g. -2).
 
 ## Prerequisites
